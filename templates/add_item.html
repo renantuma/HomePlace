@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_item.css') }}">
+    <title>Adicionar Item</title>
+</head>
+<body>
+    <h1>Adicionar Novo Item</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <input type="text" name="description" placeholder="Descrição" required>
+        <input type="number" name="value" placeholder="Valor" step="0.01" required>
+        <button type="submit">Adicionar</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Voltar para o Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePlace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="menu">
+        <img class="logo" src="{{ url_for('static', filename='Logo.png') }}" alt="logo">
+        <div class="menu-options">
+            <a href="#">{{ username }}</a>
+            <a href="{{ url_for('logout') }}">logout</a>
+        </div>
+    </div>
+
+    <a class="add" href="{{ url_for('add_item') }}">Add a new ad</a>
+    <div class="items">
+        {% for item in items %}
+        <div class="item">
+            <img src="{{ url_for('static', filename=item.image) }}" alt="Imagem do item">
+            <p><strong>Descrição:</strong> {{ item.description }}</p>
+            <p><strong>Valor:</strong> R$ {{ item.value }}</p>
+            <p><small>Adicionado por: {{ item.user.username }}</small></p>
+            {% if item.user_id == session['user_id'] %}
+            <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" style="display: inline;">
+                <button type="submit">Excluir</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
